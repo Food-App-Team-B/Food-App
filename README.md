@@ -8,16 +8,16 @@ The Recipe App is a user-friendly application designed to assist you in discover
 
 ## Key Features:
 
-Recipe Discovery: Explore a vast collection of recipes across various cuisines, meal types, and dietary preferences. Find inspiration for your next meal with our curated selection of dishes.
+- Recipe Discovery: Explore a vast collection of recipes across various cuisines, meal types, and dietary preferences. Find inspiration for your next meal with our curated selection of dishes.
 
-Recipe Management: Save your favorite recipes to your personal collection for quick and easy access. Organize recipes into categories, such as breakfast, lunch, dinner, desserts, and more, to stay organized and efficient in the kitchen.
+- Recipe Management: Save your favorite recipes to your personal collection for quick and easy access. Organize recipes into categories, such as breakfast, lunch, dinner, desserts, and more, to stay organized and efficient in the kitchen.
 
-Customization: Modify recipes to suit your taste preferences or dietary restrictions. Easily adjust ingredients, portions, and cooking methods to create personalized versions of your favorite dishes.
+- Customization: Modify recipes to suit your taste preferences or dietary restrictions. Easily adjust ingredients, portions, and cooking methods to create personalized versions of your favorite dishes.
 
-Shopping List: Generate a shopping list based on the ingredients required for your selected recipes. Streamline your grocery shopping experience by having all the necessary items conveniently listed in one place.
+- Shopping List: Generate a shopping list based on the ingredients required for your selected recipes. Streamline your grocery shopping experience by having all the necessary items conveniently listed in one place.
 
-Cooking Instructions: Access clear and concise cooking instructions for each recipe, accompanied by step-by-step photos or videos to guide you through the cooking process with confidence.
+- Cooking Instructions: Access clear and concise cooking instructions for each recipe, accompanied by step-by-step photos or videos to guide you through the cooking process with confidence.
 
-Community Interaction: Connect with other users, share your culinary creations, and discover new recipes through community features such as recipe reviews, ratings, and comments.
+- Community Interaction: Connect with other users, share your culinary creations, and discover new recipes through community features such as recipe reviews, ratings, and comments.
 
 ## Getting Started:
