@@ -20,4 +20,4 @@ Cooking Instructions: Access clear and concise cooking instructions for each rec
 
 Community Interaction: Connect with other users, share your culinary creations, and discover new recipes through community features such as recipe reviews, ratings, and comments.
 
-Getting Started:
+## Getting Started:
