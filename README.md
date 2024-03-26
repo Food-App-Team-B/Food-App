@@ -4,7 +4,7 @@ Welcome to the Recipe App! This README file serves as a guide to help you get st
 
 ## Overview:
 
-The Recipe App is a user-friendly application designed to assist you in discovering, organizing, and sharing your favorite recipes. This application is built using Java for the frontend (GUI) and backend. SQL is also being utilized for database management.
+The Recipe App is a user-friendly desktop application designed for use on Windows, aimed to assist you in discovering, organizing, and sharing your favorite recipes. This application is built using Java for the frontend (GUI) and backend. SQL is also being utilized for the database management.
 
 ## Key Features:
 
