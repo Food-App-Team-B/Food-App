@@ -1,12 +1,12 @@
-Recipe App
+# Recipe App
 
 Welcome to the Recipe App! This README file serves as a guide to help you get started with using the application.
 
-Overview:
+## Overview:
 
-The Recipe App is a user-friendly application designed to assist you in discovering, organizing, and sharing your favorite recipes. The
+The Recipe App is a user-friendly application designed to assist you in discovering, organizing, and sharing your favorite recipes. The programming language is Java
 
-Key Features:
+## Key Features:
 
 Recipe Discovery: Explore a vast collection of recipes across various cuisines, meal types, and dietary preferences. Find inspiration for your next meal with our curated selection of dishes.
 
