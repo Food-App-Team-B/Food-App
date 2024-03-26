@@ -8,9 +8,9 @@ The Recipe App is a user-friendly application designed to assist you in discover
 
 ## Key Features:
 
-- Recipe Discovery: Explore a vast collection of recipes across various cuisines, meal types, and dietary preferences. Find inspiration for your next meal with our curated selection of dishes.
+1. Recipe Discovery: Explore a vast collection of recipes across various cuisines, meal types, and dietary preferences. Find inspiration for your next meal with our curated selection of dishes.
 
-- Recipe Management: Save your favorite recipes to your personal collection for quick and easy access. Organize recipes into categories, such as breakfast, lunch, dinner, desserts, and more, to stay organized and efficient in the kitchen.
+2. Recipe Management: Save your favorite recipes to your personal collection for quick and easy access. Organize recipes into categories, such as breakfast, lunch, dinner, desserts, and more, to stay organized and efficient in the kitchen.
 
 - Customization: Modify recipes to suit your taste preferences or dietary restrictions. Easily adjust ingredients, portions, and cooking methods to create personalized versions of your favorite dishes.
 
