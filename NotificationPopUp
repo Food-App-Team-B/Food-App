@@ -1,0 +1,48 @@
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+public class SimpleNotificationGUI extends JFrame {
+
+    private JButton showNotificationButton;
+
+    public SimpleNotificationGUI() {
+        setTitle("Simple Notification GUI");
+        setSize(300, 200);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        initComponents();
+        initListeners();
+    }
+
+    private void initComponents() {
+        showNotificationButton = new JButton("Show Notification");
+        JPanel panel = new JPanel();
+        panel.add(showNotificationButton);
+
+        add(panel, BorderLayout.CENTER);
+    }
+
+    private void initListeners() {
+        showNotificationButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                showNotification();
+            }
+        });
+    }
+
+    private void showNotification() {
+        JOptionPane.showMessageDialog(this, "This is a simple notification!", "Notification", JOptionPane.INFORMATION_MESSAGE);
+    }
+
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                new SimpleNotificationGUI().setVisible(true);
+            }
+        });
+    }
+}
