@@ -14,10 +14,6 @@ public class RecipeAppGUI extends JFrame {
         JPanel mainPanel = new JPanel();
         mainPanel.setLayout(new BorderLayout());
 
-        JLabel titleLabel = new JLabel("Recipe App");
-        titleLabel.setHorizontalAlignment(SwingConstants.CENTER);
-        mainPanel.add(titleLabel, BorderLayout.NORTH);
-
         JTextArea recipeTextArea = new JTextArea();
         recipeTextArea.setEditable(false);
         recipeTextArea.setLineWrap(true); // Enable text wrapping
@@ -30,20 +26,20 @@ public class RecipeAppGUI extends JFrame {
         mainPanel.add(scrollPane, BorderLayout.CENTER);
 
         JPanel buttonPanel = new JPanel(new GridLayout(3, 2, 5, 5)); // 3x2 grid layout for buttons
-        JButton randomButton1 = new JButton("Add Recipe");
-        JButton randomButton2 = new JButton("View Recipes");
-        JButton randomButton3 = new JButton("Add Food");
-        JButton randomButton4 = new JButton("Remove Food");
-        JButton randomButton5 = new JButton("Settings");
-        JButton randomButton6 = new JButton("Logout");
+        JButton cookbookButton = new JButton("Cookbook");
+        JButton ingredientsButton = new JButton("Ingredients");
+        JButton recommentButton = new JButton("Recommend Something");
+        JButton searchButton = new JButton("Search"); // TODO Placement text "search recipe"
+        JButton cleanButton = new JButton("Clean Pantry"); // TODO Notification that asks if you are sure
+        JButton prefButton = new JButton("Preferences");
 
         // Add buttons to the panel
-        buttonPanel.add(randomButton1);
-        buttonPanel.add(randomButton2);
-        buttonPanel.add(randomButton3);
-        buttonPanel.add(randomButton4);
-        buttonPanel.add(randomButton5);
-        buttonPanel.add(randomButton6);
+        buttonPanel.add(cookbookButton);
+        buttonPanel.add(ingredientsButton);
+        buttonPanel.add(recommentButton);
+        buttonPanel.add(searchButton);
+        buttonPanel.add(cleanButton);
+        buttonPanel.add(prefButton);
 
         mainPanel.add(buttonPanel, BorderLayout.SOUTH);
 
