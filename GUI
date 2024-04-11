@@ -1,8 +1,18 @@
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class RecipeAppGUI extends JFrame {
+    private JComboBox<String> dietRestrictions;
+    private List<JCheckBox> allergyCheckboxes;
+    private List<String> restrictedFoods;
+    private Map<String, List<String>> dietFoodRestrictions;
+    private Map<String, String> allergyFoodMappings;
+
     public RecipeAppGUI() {
         setTitle("Recipe App");
         setSize(800, 600);
@@ -11,8 +21,6 @@ public class RecipeAppGUI extends JFrame {
 
         // Create components
         JPanel mainPanel = new JPanel(new BorderLayout());
-
-        // Set background color
         mainPanel.setBackground(new Color(255, 165, 0)); // Orange color
 
         JPanel contentPanel = new JPanel(new BorderLayout());
@@ -27,8 +35,6 @@ public class RecipeAppGUI extends JFrame {
         contentPanel.add(scrollPane, BorderLayout.CENTER);
 
         JPanel buttonPanel = new JPanel(new GridLayout(3, 2, 10, 10)); // 3x2 grid layout for buttons
-
-        // Set background color for button panel
         buttonPanel.setBackground(new Color(30, 144, 255)); // Dodger Blue color
 
         JButton cookbookButton = new JButton("Cookbook");
@@ -76,6 +82,101 @@ public class RecipeAppGUI extends JFrame {
                 }
             }
         });
+
+        // Add action listener for prefButton
+        prefButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // Create and display the Preferences dialog
+                JDialog preferencesDialog = createPreferencesDialog();
+                preferencesDialog.setVisible(true);
+            }
+        });
+
+        // Initialize data for preferences
+        initializePreferencesData();
+    }
+
+    private void initializePreferencesData() {
+        restrictedFoods = new ArrayList<>();
+        dietFoodRestrictions = new HashMap<>();
+        allergyFoodMappings = new HashMap<>();
+
+        // Initialize diet restrictions
+        String[] diets = {"None", "Vegetarian", "Vegan", "Keto", "Paleo"};
+        for (String diet : diets) {
+            dietFoodRestrictions.put(diet, new ArrayList<>());
+        }
+
+        // Initialize allergy mappings
+        String[] allergies = {"Nuts", "Dairy", "Gluten", "Eggs", "Seafood"};
+        for (String allergy : allergies) {
+            allergyFoodMappings.put(allergy, allergy);
+        }
+    }
+
+    private JDialog createPreferencesDialog() {
+        JDialog preferencesDialog = new JDialog(this, "Preferences", true);
+        preferencesDialog.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        preferencesDialog.setLayout(new BoxLayout(preferencesDialog.getContentPane(), BoxLayout.Y_AXIS));
+
+        JPanel allergiesPanel = new JPanel(new GridLayout(0, 2, 10, 10));
+        allergiesPanel.setBorder(BorderFactory.createTitledBorder("Allergies"));
+        allergyCheckboxes = new ArrayList<>();
+        String[] allergies = {"Nuts", "Dairy", "Gluten", "Eggs", "Seafood"};
+        for (String allergy : allergies) {
+            JCheckBox checkBox = new JCheckBox(allergy);
+            checkBox.addActionListener(e -> updateRestrictedFoodsBasedOnAllergies());
+            allergyCheckboxes.add(checkBox);
+            allergiesPanel.add(checkBox);
+        }
+        preferencesDialog.add(allergiesPanel);
+
+        JPanel dietPanel = new JPanel();
+        dietPanel.setBorder(BorderFactory.createTitledBorder("Diet Restrictions"));
+        String[] diets = {"None", "Vegetarian", "Vegan", "Keto", "Paleo"};
+        dietRestrictions = new JComboBox<>(diets);
+        dietPanel.add(dietRestrictions);
+        preferencesDialog.add(dietPanel);
+
+        // Add action listener to diet restrictions combo box
+        dietRestrictions.addActionListener(e -> updateRestrictedFoodsBasedOnDiet((String) dietRestrictions.getSelectedItem()));
+
+        // Layout and display adjustments
+        alignComponents(preferencesDialog.getContentPane());
+        preferencesDialog.pack(); // Adjusts the size of the frame to fit its contents
+        preferencesDialog.setLocationRelativeTo(this); // Center the dialog relative to the main frame
+
+        return preferencesDialog;
+    }
+
+    private void updateRestrictedFoodsBasedOnDiet(String selectedDiet) {
+        restrictedFoods.clear();
+        restrictedFoods.addAll(dietFoodRestrictions.getOrDefault(selectedDiet, new ArrayList<>()));
+        updateRestrictedFoodsBasedOnAllergies();
+        System.out.println("Updated Restricted Foods: " + restrictedFoods);
+    }
+
+    private void updateRestrictedFoodsBasedOnAllergies() {
+        String selectedDiet = (String) dietRestrictions.getSelectedItem();
+        restrictedFoods.addAll(dietFoodRestrictions.getOrDefault(selectedDiet, new ArrayList<>()));
+        for (JCheckBox checkBox : allergyCheckboxes) {
+            if (checkBox.isSelected()) {
+                String food = allergyFoodMappings.get(checkBox.getText());
+                if (!restrictedFoods.contains(food)) {
+                    restrictedFoods.add(food);
+                }
+            }
+        }
+        System.out.println("Updated Restricted Foods: " + restrictedFoods);
+    }
+
+    private void alignComponents(Container container) {
+        for (Component comp : container.getComponents()) {
+            if (comp instanceof JComponent) {
+                ((JComponent) comp).setAlignmentX(Component.LEFT_ALIGNMENT);
+            }
+        }
     }
 
     public static void main(String[] args) {
