@@ -14,7 +14,7 @@ public class SettingsTab extends JFrame {
     private Map<String, String> allergyFoodMappings;
 
     public SettingsTab() {
-        setTitle("MyPantry Settings");
+        setTitle("Preferences");
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         getContentPane().setLayout(new BoxLayout(getContentPane(), BoxLayout.Y_AXIS));
 
