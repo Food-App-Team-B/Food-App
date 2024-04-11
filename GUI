@@ -1,47 +1,61 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.*;
 
 public class RecipeAppGUI extends JFrame {
     public RecipeAppGUI() {
         setTitle("Recipe App");
-        // Set the size to take up 4/5 of the screen
-        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-        setSize(screenSize.width * 4 / 5, screenSize.height * 4 / 5);
+        setSize(800, 600);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null); // Center the window on the screen
 
         // Create components
-        JPanel mainPanel = new JPanel();
-        mainPanel.setLayout(new BorderLayout());
+        JPanel mainPanel = new JPanel(new BorderLayout());
+
+        // Set background color
+        mainPanel.setBackground(new Color(255, 165, 0)); // Orange color
+
+        JPanel contentPanel = new JPanel(new BorderLayout());
+        mainPanel.add(contentPanel, BorderLayout.CENTER);
 
         JTextArea recipeTextArea = new JTextArea();
         recipeTextArea.setEditable(false);
+        recipeTextArea.setForeground(Color.BLACK); // Set text color
         recipeTextArea.setLineWrap(true); // Enable text wrapping
         recipeTextArea.setWrapStyleWord(true); // Wrap at word boundaries
         JScrollPane scrollPane = new JScrollPane(recipeTextArea);
+        contentPanel.add(scrollPane, BorderLayout.CENTER);
 
-        // Set the preferred size of the scroll pane to take up the top half of the window
-        scrollPane.setPreferredSize(new Dimension(getWidth(), getHeight() / 2));
+        JPanel buttonPanel = new JPanel(new GridLayout(3, 2, 10, 10)); // 3x2 grid layout for buttons
 
-        mainPanel.add(scrollPane, BorderLayout.CENTER);
+        // Set background color for button panel
+        buttonPanel.setBackground(new Color(30, 144, 255)); // Dodger Blue color
 
-        JPanel buttonPanel = new JPanel(new GridLayout(3, 2, 5, 5)); // 3x2 grid layout for buttons
         JButton cookbookButton = new JButton("Cookbook");
         JButton ingredientsButton = new JButton("Ingredients");
-        JButton recommentButton = new JButton("Recommend Something");
-        JButton searchButton = new JButton("Search"); // TODO Placement text "search recipe"
-        JButton cleanButton = new JButton("Clean Pantry"); // TODO Notification that asks if you are sure
+        JButton recommendButton = new JButton("Recommend Something");
+        JButton searchButton = new JButton("Search");
+        JButton cleanButton = new JButton("Clean Pantry");
         JButton prefButton = new JButton("Preferences");
+
+        // Customize button colors and fonts
+        Font buttonFont = new Font("Arial", Font.PLAIN, 18);
+        cookbookButton.setFont(buttonFont);
+        ingredientsButton.setFont(buttonFont);
+        recommendButton.setFont(buttonFont);
+        searchButton.setFont(buttonFont);
+        cleanButton.setFont(buttonFont);
+        prefButton.setFont(buttonFont);
 
         // Add buttons to the panel
         buttonPanel.add(cookbookButton);
         buttonPanel.add(ingredientsButton);
-        buttonPanel.add(recommentButton);
+        buttonPanel.add(recommendButton);
         buttonPanel.add(searchButton);
         buttonPanel.add(cleanButton);
         buttonPanel.add(prefButton);
 
-        mainPanel.add(buttonPanel, BorderLayout.SOUTH);
+        contentPanel.add(buttonPanel, BorderLayout.SOUTH);
 
         // Add some placeholder text to the recipe text area
         recipeTextArea.setText("Lorem ipsum dolor sit amet, consectetur adipiscing elit. " +
@@ -50,6 +64,18 @@ public class RecipeAppGUI extends JFrame {
 
         add(mainPanel);
         setVisible(true);
+
+        // Add action listener for cleanButton
+        cleanButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int option = JOptionPane.showConfirmDialog(RecipeAppGUI.this, "Are you sure? This cannot be undone.", "Clean Pantry", JOptionPane.YES_NO_OPTION);
+                if (option == JOptionPane.YES_OPTION) {
+                    // Perform clean action
+                    JOptionPane.showMessageDialog(RecipeAppGUI.this, "Pantry cleaned successfully.");
+                }
+            }
+        });
     }
 
     public static void main(String[] args) {
