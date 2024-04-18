@@ -2,10 +2,9 @@ import java.sql.*;
 
 public class jdbcDatabase {
 
-    // adding appconfig file for hiding the url, username, and password of the database from the user
-    private static final String URL = "jdbc:mysql://localhost:3306/foodapp";
-    private static final String USER = "root";
-    private static final String PASSWORD = "FoodApp$$81";
+    private static final String URL = AppConfig.getAWSDatabaseURL();
+    private static final String USER = AppConfig.getAWSDatabaseUsername();
+    private static final String PASSWORD = AppConfig.getAWSDatabasePassword();
     private static Connection connection;
     private static String query = "select * from Recipe";
 
@@ -18,9 +17,9 @@ public class jdbcDatabase {
                 ResultSet result = statement.executeQuery(query);
 
                 // using a sql query
-                while (result.next()){
+                while (result.next()) {
                     String data = "";
-                    for (int i = 1; i <= 5; i++){
+                    for (int i = 1; i <= 5; i++) {
                         data += result.getString(i) + ":";
                     }
                     System.out.println(data);
