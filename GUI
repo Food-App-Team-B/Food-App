@@ -6,14 +6,14 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class RecipeAppGUI extends JFrame {
+public class GUI extends JFrame {
     private JComboBox<String> dietRestrictions;
     private List<JCheckBox> allergyCheckboxes;
     private List<String> restrictedFoods;
     private Map<String, List<String>> dietFoodRestrictions;
     private Map<String, String> allergyFoodMappings;
 
-    public RecipeAppGUI() {
+    public GUI() {
         setTitle("Recipe App");
         setSize(800, 600);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -180,6 +180,6 @@ public class RecipeAppGUI extends JFrame {
     }
 
     public static void main(String[] args) {
-        SwingUtilities.invokeLater(() -> new RecipeAppGUI());
+        SwingUtilities.invokeLater(() -> new GUI());
     }
 }
