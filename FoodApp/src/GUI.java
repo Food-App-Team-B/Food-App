@@ -62,12 +62,6 @@ public class GUI extends JFrame {
 
     private void initializeDashboardPanel() {
         // Creating components for dashboard panel
-        JPanel topPanel = new JPanel();
-        JTextField searchField = new JTextField(20);
-        JButton searchButton = new JButton("Search");
-        topPanel.add(searchField);
-        topPanel.add(searchButton);
-
         JPanel bottomPanel = new JPanel();
         JButton suggestButton = new JButton("Suggest Meal (AI)");
         JButton addIngredientButton = new JButton("Add Ingredient");
@@ -93,7 +87,6 @@ public class GUI extends JFrame {
         centerPanel.add(fillerLabel, BorderLayout.CENTER);
 
         JPanel mainPanel = new JPanel(new BorderLayout());
-        mainPanel.add(topPanel, BorderLayout.NORTH);
         mainPanel.add(centerPanel, BorderLayout.CENTER);
         mainPanel.add(bottomPanel, BorderLayout.SOUTH);
 
@@ -104,15 +97,7 @@ public class GUI extends JFrame {
         // Adding dashboard panel to card panel
         cardPanel.add(dashboardPanel, "dashboard");
 
-        // Adding action listeners for buttons in the dashboard
-        searchButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                String searchTerm = searchField.getText();
-                // Implement search functionality here
-            }
-        });
-
+        // Add action listeners for buttons in the dashboard
         suggestButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
