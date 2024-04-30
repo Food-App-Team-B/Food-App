@@ -1,4 +1,5 @@
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -6,25 +7,42 @@ import java.awt.event.ActionListener;
 public class RecipeApp extends JFrame {
     private JPanel cardPanel;
     private CardLayout cardLayout;
-    private JPanel welcomePanel, loginPanel, dataInputPanel;
+    private JPanel welcomePanel, loginPanel, pantryPanel;
     private JTextField usernameField, emailField, passwordField, ingredientField;
-    private JButton loginButton, nextButton, prevButton, addIngredientButton;
-    private JLabel welcomeLabel;
+    private JButton loginButton, nextButton, prevButton, addIngredientButton, profileButton, exitButton;
+    private JLabel welcomeLabel, profileLabel;
     private DefaultListModel<String> pantryModel;
+    private JList<String> pantryList;
 
     public RecipeApp() {
         setTitle("PanTRY");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setExtendedState(JFrame.MAXIMIZED_BOTH);
-        setUndecorated(true); // Remove window decoration
+        setUndecorated(true);
         setLocationRelativeTo(null);
 
-        // Creating welcome panel
+        // Welcome Panel
         welcomeLabel = new JLabel("Welcome back user");
-        welcomeLabel.setFont(new Font("Arial", Font.PLAIN, 36));
+        welcomeLabel.setFont(new Font("Arial", Font.BOLD, 48));
+        JPanel welcomeContent = new JPanel(new BorderLayout());
+        welcomeContent.add(welcomeLabel, BorderLayout.CENTER);
+        exitButton = new JButton("X");
+        exitButton.setFont(new Font("Arial", Font.PLAIN, 18));
+        exitButton.setForeground(Color.RED);
+        exitButton.setContentAreaFilled(false);
+        exitButton.setBorderPainted(false);
+        exitButton.setFocusPainted(false);
+        exitButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.exit(0);
+            }
+        });
+        JPanel welcomeHeader = new JPanel(new FlowLayout(FlowLayout.RIGHT));
+        welcomeHeader.add(exitButton);
         welcomePanel = new JPanel(new BorderLayout());
-        welcomePanel.add(welcomeLabel, BorderLayout.CENTER);
-        add(welcomePanel);
+        welcomePanel.add(welcomeHeader, BorderLayout.NORTH);
+        welcomePanel.add(welcomeContent, BorderLayout.CENTER);
 
         // Delayed switch to login panel
         Timer timer = new Timer(4000, new ActionListener() {
@@ -37,7 +55,7 @@ public class RecipeApp extends JFrame {
         timer.setRepeats(false);
         timer.start();
 
-        // Creating components for login panel
+        // Login Panel
         usernameField = new JTextField(20);
         emailField = new JTextField(20);
         passwordField = new JTextField(20);
@@ -45,10 +63,19 @@ public class RecipeApp extends JFrame {
         loginButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                cardLayout.show(cardPanel, "dataInput");
+                cardLayout.show(cardPanel, "pantry");
             }
         });
-        JPanel loginComponents = new JPanel(new GridLayout(4, 1));
+        profileButton = new JButton("Profile");
+        profileButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JOptionPane.showMessageDialog(RecipeApp.this,
+                        "Username: " + usernameField.getText() + "\nEmail: " + emailField.getText(),
+                        "Profile Information", JOptionPane.INFORMATION_MESSAGE);
+            }
+        });
+        JPanel loginComponents = new JPanel(new GridLayout(5, 1));
         loginComponents.add(new JLabel("Username:"));
         loginComponents.add(usernameField);
         loginComponents.add(new JLabel("Email:"));
@@ -56,34 +83,53 @@ public class RecipeApp extends JFrame {
         loginComponents.add(new JLabel("Password:"));
         loginComponents.add(passwordField);
         loginComponents.add(loginButton);
+        loginComponents.add(profileButton);
         loginPanel = new JPanel(new BorderLayout());
         loginPanel.add(loginComponents, BorderLayout.CENTER);
 
-        // Creating components for data input panel
-        dataInputPanel = new JPanel(new BorderLayout());
+        // Pantry Panel
         ingredientField = new JTextField(20);
-        addIngredientButton = new JButton("Add Ingredient");
+        ingredientField.setFont(new Font("Arial", Font.PLAIN, 20));
+        addIngredientButton = new JButton("Add");
         addIngredientButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 String ingredient = ingredientField.getText();
-                // Placeholder method for adding ingredient to pantry
                 addIngredientToPantry(ingredient);
                 ingredientField.setText("");
             }
         });
-        JPanel dataInputComponents = new JPanel(new GridLayout(2, 1));
-        dataInputComponents.add(new JLabel("Ingredient:"));
-        dataInputComponents.add(ingredientField);
-        dataInputComponents.add(addIngredientButton);
-        dataInputPanel.add(dataInputComponents, BorderLayout.CENTER);
+        JPanel pantryComponents = new JPanel(new BorderLayout());
+        JPanel inputPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        inputPanel.add(ingredientField);
+        inputPanel.add(addIngredientButton);
+        pantryComponents.add(inputPanel, BorderLayout.NORTH);
+        pantryModel = new DefaultListModel<>();
+        pantryList = new JList<>(pantryModel);
+        pantryList.setFont(new Font("Arial", Font.PLAIN, 16));
+        JScrollPane pantryScrollPane = new JScrollPane(pantryList);
+        pantryComponents.add(pantryScrollPane, BorderLayout.CENTER);
+        profileButton = new JButton("Profile");
+        profileButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JOptionPane.showMessageDialog(RecipeApp.this,
+                        "Username: " + usernameField.getText() + "\nEmail: " + emailField.getText(),
+                        "Profile Information", JOptionPane.INFORMATION_MESSAGE);
+            }
+        });
+        JPanel pantryHeader = new JPanel(new FlowLayout(FlowLayout.RIGHT));
+        pantryHeader.add(profileButton);
+        pantryPanel = new JPanel(new BorderLayout());
+        pantryPanel.add(pantryHeader, BorderLayout.NORTH);
+        pantryPanel.add(pantryComponents, BorderLayout.CENTER);
 
         // Creating card panel with CardLayout
         cardLayout = new CardLayout();
         cardPanel = new JPanel(cardLayout);
         cardPanel.add(welcomePanel, "welcome");
         cardPanel.add(loginPanel, "login");
-        cardPanel.add(dataInputPanel, "dataInput");
+        cardPanel.add(pantryPanel, "pantry");
 
         // Adding card panel to frame
         add(cardPanel);
@@ -95,10 +141,7 @@ public class RecipeApp extends JFrame {
     }
 
     private void addIngredientToPantry(String ingredient) {
-        // Placeholder method for adding ingredient to pantry
-        // Here you can implement functionality to add the ingredient to the pantry
-        System.out.println("Adding ingredient to pantry: " + ingredient);
-        pantryModel.addElement(ingredient); // Adding ingredient to the list model
+        pantryModel.addElement(ingredient);
     }
 
     public static void main(String[] args) {
