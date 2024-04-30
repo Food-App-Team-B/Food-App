@@ -6,10 +6,11 @@ import java.awt.event.ActionListener;
 public class GUI extends JFrame {
     private JPanel cardPanel;
     private CardLayout cardLayout;
-    private JPanel loginPanel, dataInputPanel, dashboardPanel;
+    private JPanel loginPanel, dataInputPanel, dashboardPanel, welcomePanel;
     private JTextField usernameField, emailField;
     private JButton loginButton, nextButton, prevButton;
     private JLabel fillerLabel;
+    private JLabel welcomeLabel;
     private boolean isFirstTime = true;
 
     public GUI() {
@@ -35,6 +36,17 @@ public class GUI extends JFrame {
                 initializeDashboardPanel(); // Initialize the dashboard panel
                 cardLayout.show(cardPanel, "dashboard");
                 setExtendedState(JFrame.MAXIMIZED_BOTH); // Maximize the window
+
+                // Show welcome panel
+                cardLayout.show(cardPanel, "welcome");
+                Timer timer = new Timer(3000, new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        cardLayout.show(cardPanel, "dashboard"); // Switch to dashboard panel after 3 seconds
+                    }
+                });
+                timer.setRepeats(false); // Execute only once
+                timer.start();
             }
         });
         JPanel loginComponents = new JPanel(new GridLayout(3, 1, 5, 5));
@@ -48,11 +60,19 @@ public class GUI extends JFrame {
         loginPanel.setBackground(new Color(241, 196, 15)); // Yellow color
         loginPanel.add(loginComponents, BorderLayout.CENTER);
 
+        // Creating welcome panel
+        welcomeLabel = new JLabel("Welcome back!");
+        welcomeLabel.setFont(new Font("Arial", Font.BOLD, 18));
+        welcomePanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        welcomePanel.add(welcomeLabel);
+        welcomePanel.setBackground(new Color(155, 89, 182)); // Purple color
+
         // Creating card panel with CardLayout
         cardLayout = new CardLayout();
         cardPanel = new JPanel(cardLayout);
         cardPanel.setBackground(new Color(236, 240, 241)); // Light Gray background for card panel
         cardPanel.add(loginPanel, "login");
+        cardPanel.add(welcomePanel, "welcome");
 
         // Adding card panel to frame
         add(cardPanel);
