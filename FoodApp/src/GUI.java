@@ -21,7 +21,11 @@ public class GUI extends JFrame {
         // Creating components for login panel
         usernameField = new JTextField(20);
         emailField = new JTextField(20);
-        loginButton = new JButton("Next");
+        loginButton = new JButton("Login");
+        loginButton.setFont(new Font("Arial", Font.BOLD, 14));
+        loginButton.setBackground(new Color(52, 152, 219)); // Blue color
+        loginButton.setForeground(Color.BLACK); // Black text color
+        loginButton.setFocusPainted(false); // Remove focus border
         loginButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -33,18 +37,21 @@ public class GUI extends JFrame {
                 setExtendedState(JFrame.MAXIMIZED_BOTH); // Maximize the window
             }
         });
-        JPanel loginComponents = new JPanel(new GridLayout(3, 1));
+        JPanel loginComponents = new JPanel(new GridLayout(3, 1, 5, 5));
+        loginComponents.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
         loginComponents.add(new JLabel("Username:"));
         loginComponents.add(usernameField);
         loginComponents.add(new JLabel("Email:"));
         loginComponents.add(emailField);
         loginComponents.add(loginButton);
         loginPanel = new JPanel(new BorderLayout());
+        loginPanel.setBackground(new Color(241, 196, 15)); // Yellow color
         loginPanel.add(loginComponents, BorderLayout.CENTER);
 
         // Creating card panel with CardLayout
         cardLayout = new CardLayout();
         cardPanel = new JPanel(cardLayout);
+        cardPanel.setBackground(new Color(236, 240, 241)); // Light Gray background for card panel
         cardPanel.add(loginPanel, "login");
 
         // Adding card panel to frame
@@ -87,6 +94,7 @@ public class GUI extends JFrame {
         centerPanel.add(fillerLabel, BorderLayout.CENTER);
 
         JPanel mainPanel = new JPanel(new BorderLayout());
+        mainPanel.setBackground(new Color(189, 195, 199)); // Silver
         mainPanel.add(centerPanel, BorderLayout.CENTER);
         mainPanel.add(bottomPanel, BorderLayout.SOUTH);
 
