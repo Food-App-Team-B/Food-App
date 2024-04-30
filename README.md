@@ -17,9 +17,7 @@ The Recipe App is a user-friendly desktop application designed for use on Window
 4. Customization: Modify recipes to suit your taste preferences or dietary restrictions. Easily adjust ingredients, portions, and cooking methods to create personalized versions of your favorite dishes.
 
 5. Shopping List: Generate a shopping list based on the ingredients required for your selected recipes. Streamline your grocery shopping experience by having all the necessary items conveniently listed in one place.
-
-6. Grocery Ordering: Whether you are running low on a specific ingredient or missing ingredients for a new recipe you are wanting to try. We assist with grocery ordering by providing seamless integration with online grocery platforms like Walmart.
    
-8. Cooking Instructions: Access clear and concise cooking instructions for each recipe to guide you through the cooking process with confidence.
+6. Cooking Instructions: Access clear and concise cooking instructions for each recipe to guide you through the cooking process with confidence.
 
 ## Getting Started:
