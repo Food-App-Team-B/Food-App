@@ -19,6 +19,7 @@ public class SpoonableAPI {
 		
 		StringBuilder urlBuilder = new StringBuilder(name);
 		urlBuilder.append("recipes/findByIngredients?ingredients=");
+		String filePath = "recipes.json";
 
 		// Append each ingredient to the URL
 		for (int i = 0; i < ingredients.size(); i++) {
@@ -40,7 +41,7 @@ public class SpoonableAPI {
 			connection.setRequestMethod("GET");
 			
 			BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
-			File file = new File("recipe.json");
+			File file = new File(filePath);
 			
 			
 			FileWriter fileWriter = new FileWriter(file);
@@ -57,8 +58,7 @@ public class SpoonableAPI {
 		catch(Exception e) {
 			e.printStackTrace();
 		}
-		
-		String filePath = "recipe.json";
+
 
         // Map to store titles and IDs
         Map<String, Long> recipeMap = new HashMap<>();
@@ -88,6 +88,34 @@ public class SpoonableAPI {
         
 	}
 	
-	
-	
+	public Recipe getRecipe(long id) {
+		String filePath = "recipeInfo.json";
+		StringBuilder urlBuilder = new StringBuilder(name);
+		
+		urlBuilder.append("/recipes");
+		urlBuilder.append("/").append(Long.toString(id));
+		urlBuilder.append("/information");
+		urlBuilder.append("?includeNutrition=false&addWinePairing=false&addTasteData=false");
+		urlBuilder.append("&apiKey=").append(api_key);
+		
+		String finalUrl = urlBuilder.toString();
+		
+		Recipe recipe;
+		try {
+			url = new URL(finalUrl);
+			// Open a connection to the URL
+			HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+			connection.setRequestMethod("GET");
+			
+			BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+			recipe = Recipe.fromJson(in);
+			return recipe;
+			
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+		return null;
+	}
 }
