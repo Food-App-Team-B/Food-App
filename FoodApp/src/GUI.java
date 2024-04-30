@@ -6,10 +6,11 @@ import java.awt.event.ActionListener;
 public class GUI extends JFrame {
     private JPanel cardPanel;
     private CardLayout cardLayout;
-    private JPanel loginPanel, dataInputPanel, dashboardPanel;
+    private JPanel loginPanel, dataInputPanel, dashboardPanel, welcomePanel;
     private JTextField usernameField, emailField;
     private JButton loginButton, nextButton, prevButton;
     private JLabel fillerLabel;
+    private JLabel welcomeLabel;
     private boolean isFirstTime = true;
 
     public GUI() {
@@ -35,6 +36,17 @@ public class GUI extends JFrame {
                 initializeDashboardPanel(); // Initialize the dashboard panel
                 cardLayout.show(cardPanel, "dashboard");
                 setExtendedState(JFrame.MAXIMIZED_BOTH); // Maximize the window
+
+                // Show welcome panel
+                cardLayout.show(cardPanel, "welcome");
+                Timer timer = new Timer(3000, new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        cardLayout.show(cardPanel, "dashboard"); // Switch to dashboard panel after 3 seconds
+                    }
+                });
+                timer.setRepeats(false); // Execute only once
+                timer.start();
             }
         });
         JPanel loginComponents = new JPanel(new GridLayout(3, 1, 5, 5));
@@ -48,11 +60,19 @@ public class GUI extends JFrame {
         loginPanel.setBackground(new Color(241, 196, 15)); // Yellow color
         loginPanel.add(loginComponents, BorderLayout.CENTER);
 
+        // Creating welcome panel
+        welcomeLabel = new JLabel("Welcome back!");
+        welcomeLabel.setFont(new Font("Arial", Font.BOLD, 18));
+        welcomePanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        welcomePanel.add(welcomeLabel);
+        welcomePanel.setBackground(new Color(155, 89, 182)); // Purple color
+
         // Creating card panel with CardLayout
         cardLayout = new CardLayout();
         cardPanel = new JPanel(cardLayout);
         cardPanel.setBackground(new Color(236, 240, 241)); // Light Gray background for card panel
         cardPanel.add(loginPanel, "login");
+        cardPanel.add(welcomePanel, "welcome");
 
         // Adding card panel to frame
         add(cardPanel);
@@ -69,7 +89,6 @@ public class GUI extends JFrame {
 
     private void initializeDashboardPanel() {
         // Creating components for dashboard panel
-        JPanel bottomPanel = new JPanel();
         JButton suggestButton = new JButton("Suggest Meal (AI)");
         JButton addIngredientButton = new JButton("Add Ingredient");
         JButton editIngredientButton = new JButton("Edit Ingredient");
@@ -79,28 +98,27 @@ public class GUI extends JFrame {
         JButton editRecipeButton = new JButton("Edit Recipe");
         JButton deleteRecipeButton = new JButton("Delete Recipe");
         JButton viewRecipeButton = new JButton("View Recipes");
-        bottomPanel.add(suggestButton);
-        bottomPanel.add(addIngredientButton);
-        bottomPanel.add(editIngredientButton);
-        bottomPanel.add(deleteIngredientButton);
-        bottomPanel.add(viewIngredientButton);
-        bottomPanel.add(addRecipeButton);
-        bottomPanel.add(editRecipeButton);
-        bottomPanel.add(deleteRecipeButton);
-        bottomPanel.add(viewRecipeButton);
+
+        JPanel topPanel = new JPanel();
+        topPanel.setBackground(new Color(189, 195, 199)); // Silver
+        topPanel.add(suggestButton);
+        topPanel.add(addIngredientButton);
+        topPanel.add(editIngredientButton);
+        topPanel.add(deleteIngredientButton);
+        topPanel.add(viewIngredientButton);
+        topPanel.add(addRecipeButton);
+        topPanel.add(editRecipeButton);
+        topPanel.add(deleteRecipeButton);
+        topPanel.add(viewRecipeButton);
 
         JPanel centerPanel = new JPanel(new BorderLayout());
         JLabel fillerLabel = new JLabel("Lorem ipsum dolor sit amet, consectetur adipiscing elit.");
         centerPanel.add(fillerLabel, BorderLayout.CENTER);
 
-        JPanel mainPanel = new JPanel(new BorderLayout());
-        mainPanel.setBackground(new Color(189, 195, 199)); // Silver
-        mainPanel.add(centerPanel, BorderLayout.CENTER);
-        mainPanel.add(bottomPanel, BorderLayout.SOUTH);
-
-        // Adding main panel to dashboard panel
+        // Adding components to dashboard panel
         dashboardPanel = new JPanel(new BorderLayout());
-        dashboardPanel.add(mainPanel, BorderLayout.CENTER);
+        dashboardPanel.add(topPanel, BorderLayout.NORTH);
+        dashboardPanel.add(centerPanel, BorderLayout.CENTER);
 
         // Adding dashboard panel to card panel
         cardPanel.add(dashboardPanel, "dashboard");
