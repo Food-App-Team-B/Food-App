@@ -89,7 +89,6 @@ public class GUI extends JFrame {
 
     private void initializeDashboardPanel() {
         // Creating components for dashboard panel
-        JPanel bottomPanel = new JPanel();
         JButton suggestButton = new JButton("Suggest Meal (AI)");
         JButton addIngredientButton = new JButton("Add Ingredient");
         JButton editIngredientButton = new JButton("Edit Ingredient");
@@ -99,28 +98,27 @@ public class GUI extends JFrame {
         JButton editRecipeButton = new JButton("Edit Recipe");
         JButton deleteRecipeButton = new JButton("Delete Recipe");
         JButton viewRecipeButton = new JButton("View Recipes");
-        bottomPanel.add(suggestButton);
-        bottomPanel.add(addIngredientButton);
-        bottomPanel.add(editIngredientButton);
-        bottomPanel.add(deleteIngredientButton);
-        bottomPanel.add(viewIngredientButton);
-        bottomPanel.add(addRecipeButton);
-        bottomPanel.add(editRecipeButton);
-        bottomPanel.add(deleteRecipeButton);
-        bottomPanel.add(viewRecipeButton);
+
+        JPanel topPanel = new JPanel();
+        topPanel.setBackground(new Color(189, 195, 199)); // Silver
+        topPanel.add(suggestButton);
+        topPanel.add(addIngredientButton);
+        topPanel.add(editIngredientButton);
+        topPanel.add(deleteIngredientButton);
+        topPanel.add(viewIngredientButton);
+        topPanel.add(addRecipeButton);
+        topPanel.add(editRecipeButton);
+        topPanel.add(deleteRecipeButton);
+        topPanel.add(viewRecipeButton);
 
         JPanel centerPanel = new JPanel(new BorderLayout());
         JLabel fillerLabel = new JLabel("Lorem ipsum dolor sit amet, consectetur adipiscing elit.");
         centerPanel.add(fillerLabel, BorderLayout.CENTER);
 
-        JPanel mainPanel = new JPanel(new BorderLayout());
-        mainPanel.setBackground(new Color(189, 195, 199)); // Silver
-        mainPanel.add(centerPanel, BorderLayout.CENTER);
-        mainPanel.add(bottomPanel, BorderLayout.SOUTH);
-
-        // Adding main panel to dashboard panel
+        // Adding components to dashboard panel
         dashboardPanel = new JPanel(new BorderLayout());
-        dashboardPanel.add(mainPanel, BorderLayout.CENTER);
+        dashboardPanel.add(topPanel, BorderLayout.NORTH);
+        dashboardPanel.add(centerPanel, BorderLayout.CENTER);
 
         // Adding dashboard panel to card panel
         cardPanel.add(dashboardPanel, "dashboard");
