@@ -21,6 +21,12 @@ public class Ingredient {
         this.expirationDate = expirationDate;
     }
 
+    public Ingredient(String name, Double quantity, String unit) {
+        this.name = name;
+        this.quantity = quantity;
+        this.unit = unit;
+    }
+
     // Method to add quantity to existing quantity
     public void addQuantity(double amount) {
         this.quantity += amount;
