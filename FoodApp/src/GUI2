@@ -4,12 +4,12 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 @SuppressWarnings("serial") // weird error idk
-public class GUI extends JFrame {
+public class GUI2 extends JFrame {
 	private JPanel signUpPanel, welcomePanel, dashboardPanel;
     private JTextField usernameField, emailField;
     private JTextArea textBox;
 
-    public GUI() {
+    public GUI2() {
         setTitle("PanTRY");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(500, 300);
@@ -180,7 +180,7 @@ public class GUI extends JFrame {
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
-                new GUI();
+                new GUI2();
             }
         });
     }
